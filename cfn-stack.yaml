@@ -1,0 +1,114 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  This CloudFormation template installs TR - A custom CloudFormation resource handler for 
+  managing MSK topics.
+Parameters:
+  S3Bucket:
+    Type: String
+  S3Key:
+    Type: String
+  SecurityGroupIds:
+    Type: "List<AWS::EC2::SecurityGroup::Id>"
+  SubnetIds:
+    Type: "List<AWS::EC2::Subnet::Id>"
+
+Resources:
+  Role:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          -
+            Effect: Allow
+            Principal: 
+              Service: 
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole 
+      Path: /
+      Policies:
+        - 
+          PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - 
+                Effect: Allow
+                Action: 
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "*"
+              - 
+                Effect: Allow
+                Action: 
+                  - kafka:DescribeCluster
+                  - kafka:GetBootstrapBrokers
+                  - kafka:BatchAssociateScramSecret 
+                  - kafka:BatchDisassociateScramSecret
+                  - kafka-cluster:CreateTopic
+                  - kafka-cluster:DeleteTopic
+                  - kafka-cluster:Connect
+                  - kafka-cluster:DescribeTopic
+                  - kafka-cluster:AlterTopic
+                  - kafka-cluster:DescribeTopicDynamicConfiguration
+                  - kafka-cluster:AlterTopicDynamicConfiguration
+                  - kafka-cluster:DescribeClusterDynamicConfiguration
+                  - kafka-cluster:DescribeCluster
+                  - kafka-cluster:DescribeGroup
+                  - kafka-cluster:AlterCluster
+                Resource: "*"
+              - 
+                Effect: Allow
+                Action: 
+                  - secretsmanager:DescribeSecret
+                  - secretsmanager:CreateSecret
+                  - secretsmanager:DeleteSecret
+                  - secretsmanager:ListSecrets
+                  - secretsmanager:PutResourcePolicy
+                Resource: "*"
+              -
+                Effect: Allow
+                Action:
+                  - ec2:DescribeNetworkInterfaces
+                  - ec2:CreateNetworkInterface
+                  - ec2:DeleteNetworkInterface
+                  - ec2:DescribeInstances
+                  - ec2:AttachNetworkInterface
+                Resource: "*"      
+              -
+                Effect: Allow
+                Action:
+                  - kms:DescribeKey
+                  - kms:Encrypt
+                  - kms:Decrypt
+                  - kms:Reencrypt
+                  - kms:GenerateDataKey*
+                  - kms:CreateGrant
+                  - kms:RevokeGrant
+                Resource: "*"
+
+  Function:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      PackageType: Zip
+      Code:
+        S3Bucket: !Ref S3Bucket
+        S3Key: !Ref S3Key
+      Runtime: go1.x
+      Handler: tr
+      Role: !GetAtt Role.Arn
+      Timeout: 120
+      ReservedConcurrentExecutions: 0
+      VpcConfig:
+        SecurityGroupIds: !Ref SecurityGroupIds
+        SubnetIds: !Ref SubnetIds
+
+Outputs:
+  MSKTopicResourceServiceToken:
+    Description: Service token for creating managing MSK topics
+    Value: !GetAtt Function.Arn
+    Export:
+      Name: MskTopicResourceServiceToken
+  
