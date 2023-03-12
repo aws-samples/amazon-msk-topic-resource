@@ -7,8 +7,8 @@ package mocks
 import (
 	context "context"
 	reflect "reflect"
-	types "tr/types"
 
+	types "github.com/aws-samples/amazon-msk-topic-resource/types"
 	gomock "github.com/golang/mock/gomock"
 )
 

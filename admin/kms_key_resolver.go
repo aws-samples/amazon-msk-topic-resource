@@ -6,7 +6,8 @@ package admin
 import (
 	"context"
 	"fmt"
-	"tr/types"
+
+	"github.com/aws-samples/amazon-msk-topic-resource/types"
 
 	"github.com/aws/aws-sdk-go-v2/service/kafka"
 	"github.com/pkg/errors"

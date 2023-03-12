@@ -1,4 +1,4 @@
-module tr
+module github.com/aws-samples/amazon-msk-topic-resource
 
 go 1.19
 

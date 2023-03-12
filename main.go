@@ -5,7 +5,8 @@ package main
 
 import (
 	"context"
-	"tr/admin"
+
+	"github.com/aws-samples/amazon-msk-topic-resource/admin"
 
 	"github.com/aws/aws-lambda-go/cfn"
 	"github.com/aws/aws-lambda-go/lambda"

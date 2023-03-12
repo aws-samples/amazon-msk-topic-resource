@@ -5,7 +5,8 @@ package admin
 
 import (
 	"context"
-	"tr/types"
+
+	"github.com/aws-samples/amazon-msk-topic-resource/types"
 
 	"github.com/pkg/errors"
 	"github.com/twmb/franz-go/pkg/kadm"

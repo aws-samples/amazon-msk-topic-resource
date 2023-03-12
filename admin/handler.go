@@ -7,7 +7,8 @@ import (
 	"context"
 	"fmt"
 	"time"
-	"tr/types"
+
+	"github.com/aws-samples/amazon-msk-topic-resource/types"
 
 	"github.com/aws/aws-lambda-go/cfn"
 	"github.com/aws/smithy-go"

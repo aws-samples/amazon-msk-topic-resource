@@ -6,8 +6,9 @@ package admin
 import (
 	"context"
 	"testing"
-	"tr/admin/mocks"
 	tt "tr/types"
+
+	"github.com/aws-samples/amazon-msk-topic-resource/admin/mocks"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/golang/mock/gomock"
