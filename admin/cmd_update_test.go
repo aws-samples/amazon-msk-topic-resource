@@ -6,7 +6,8 @@ package admin
 import (
 	"context"
 	"testing"
-	tt "tr/types"
+
+	tt "github.com/aws-samples/amazon-msk-topic-resource/types"
 
 	"github.com/aws-samples/amazon-msk-topic-resource/admin/mocks"
 
