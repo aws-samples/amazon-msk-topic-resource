@@ -1,5 +1,7 @@
 # TR - MSK Topic Resource for CloudFormation
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/aws-samples/amazon-msk-topic-resource)](https://goreportcard.com/report/github.com/aws-samples/amazon-msk-topic-resource)
+
 ## Summary
 TR is a custom CloudFormation resource that can be used to create and manage Kafka topics in MSK clusters. With TR, you can deploy and manage Kafka topics in the same way you manage other application infrastructure. Deploying MSK topics using TR has the following benefits.
 - Manage topic infrastructure as code
