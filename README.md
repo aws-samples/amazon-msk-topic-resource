@@ -62,8 +62,8 @@ Complete schema definition for TR resource is listed below.
     - Specifiy what to be done to the topic and data when the CloudFormation stack is deleted
     - Type: `string`
       - The value is restricted to the following: <br/>
-        1. "DELETE" - Delete the topic and relinquish storage resources used for topic data (default)
-        2. "RETAIN" - Retains the topic and data in MSK. You will need to manage the topic manually after CloudFormation stack is deleted.
+        1. "RETAIN" - Retains the topic and data in MSK (default). You will need to manage the topic manually after CloudFormation stack is deleted.
+        2. "DELETE" - Delete the topic and relinquish storage resources used for topic data
     - Update requires: [Update with No Interruption](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt) 
  - <b id="#Partitions">Partitions</b> `required`
 	 - Number of partitions in this topic
