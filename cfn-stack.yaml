@@ -100,7 +100,7 @@ Resources:
       Handler: tr
       Role: !GetAtt Role.Arn
       Timeout: 120
-      ReservedConcurrentExecutions: 0
+      ReservedConcurrentExecutions: 1
       VpcConfig:
         SecurityGroupIds: !Ref SecurityGroupIds
         SubnetIds: !Ref SubnetIds
