@@ -2,6 +2,10 @@
 
 By Christal Poon and Toh Yun Yun
 
+The purpose of this document is to demonstrate how to set up a usable AWS environment to deploy the Amazon MSK Topic Resource, and deploying the resource itself.
+
+An MSK cluster is typically built within a private subnet, with a set of configurations that does not have access to the internet. However, the AWS Lambda function that is deployed with this resource would need to be in a private subnet that is connected to the internet. Additionally, the MSK cluster should be provisioned for the resource to work. Proceed to Section 1 to set up this environment for your MSK cluster. If you already have a working environment, you may proceed to Section 2 for instructions to deploy the resource.
+
 ## Installation Guide
 
 ### Go Language
@@ -126,18 +130,7 @@ To create a secure environment for your workloads, a Virtual Private Cloud (VPC)
 
 Clone the repository into your local device from this link: [https://github.com/aws-samples/amazon-msk-topic-resource](https://github.com/aws-samples/amazon-msk-topic-resource)
 
-#### 2.1 For Internal Users
-
-These setup steps are for internal users who are using this resource. 
-
-- Ensure that you are connected to the VPN
-- On the terminal, run the following command to sign in and authenticate: `mwinit`
-- After authenticating via Midway, run the following command to sign in with your credentials in the terminal: `isengardcli assume`
-    - Key in the region that the s3 bucket have been set up in. eg ap-southeast-1
-    - Select the account to deploy the CloudFormation template in
-
-#### 2.2 For External Users
-#### 2.2.1 Running the resource on your local terminal
+#### 2.1 Running the resource on your local terminal
 
 For external users, ensure that your authenticated in the AWS CLI before proceeding with the following steps
 
@@ -183,7 +176,7 @@ aws cloudformation describe-stacks —stack-name tr —query "Stacks[].Outputs" 
 
 ![Flow](assets/image1.png)
 
-#### 2.2.2 Running the resource on AWS Cloud9 
+#### 2.2 Running the resource on AWS Cloud9 
 
 For external users, ensure that you have an IAM user with Access Key enabled.
 
